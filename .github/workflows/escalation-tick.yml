@@ -1,0 +1,23 @@
+# Moves every circle's escalation ladder forward.
+# Vercel's free plan only allows a daily cron, so GitHub Actions calls the
+# protected tick endpoint every 10 minutes. The endpoint is idempotent, and the
+# dashboard also ticks lazily on every load, so a late or skipped run is harmless.
+name: Escalation tick
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Call /api/cron/tick
+        env:
+          APP_URL: ${{ secrets.APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          curl --fail-with-body -sS -X POST "$APP_URL/api/cron/tick" \
+            -H "Authorization: Bearer $CRON_SECRET" --max-time 60
