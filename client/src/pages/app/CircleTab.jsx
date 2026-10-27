@@ -7,7 +7,7 @@ import Field from '../../components/Field.jsx';
 import { post, patch, put, del } from '../../lib/api.js';
 import { useAuth } from '../../lib/auth.jsx';
 import { useToast } from '../../lib/toast.jsx';
-import { enablePush, pushPermission } from '../../lib/push.js';
+import { enablePush, pushState } from '../../lib/push.js';
 import { timeAgo, fmtDay } from '../../lib/format.js';
 
 function useRefresh(circleId) {
@@ -266,11 +266,23 @@ export default function CircleTab({ data }) {
     onError: (e) => toast.error(e),
   });
 
-  const [perm, setPerm] = useState(pushPermission());
+  const [perm, setPerm] = useState('checking');
+  useEffect(() => {
+    let alive = true;
+    pushState().then((s) => {
+      if (!alive) return;
+      setPerm(s);
+      // Re-register an existing subscription so it belongs to whoever is signed in now.
+      if (s === 'subscribed') enablePush('user').catch(() => {});
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
   const push = useMutation({
     mutationFn: () => enablePush('user'),
     onSuccess: () => {
-      setPerm('granted');
+      setPerm('subscribed');
       toast.ok('Alerts will now pop up on this device.');
     },
     onError: (e) => toast.error(e),
@@ -395,10 +407,12 @@ export default function CircleTab({ data }) {
               <button className="btn btn-sm" disabled={saveMe.isPending}>
                 Save my details
               </button>
-              {perm === 'granted' ? (
+              {perm === 'checking' ? null : perm === 'subscribed' ? (
                 <span className="chip chip-leaf">Alerts pop up on this device</span>
               ) : perm === 'unsupported' ? (
                 <span className="tiny muted">This browser can't show pop-up alerts. You'll still see them in the bell.</span>
+              ) : perm === 'denied' ? (
+                <span className="tiny muted">Pop-up alerts are blocked in this browser's settings. You'll still see them in the bell.</span>
               ) : (
                 <button type="button" className="btn btn-sm btn-ghost" onClick={() => push.mutate()} disabled={push.isPending}>
                   Turn on pop-up alerts here

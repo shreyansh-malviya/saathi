@@ -18,6 +18,19 @@ export function pushPermission() {
   return pushSupported() ? Notification.permission : 'unsupported';
 }
 
+/**
+ * Real state of push on this browser: 'unsupported' | 'denied' | 'subscribed' | 'off'.
+ * Permission alone is not enough: the browser may have permission but no
+ * subscription registered for the account that is signed in now.
+ */
+export async function pushState() {
+  if (!pushSupported()) return 'unsupported';
+  if (Notification.permission === 'denied') return 'denied';
+  const reg = await navigator.serviceWorker.getRegistration();
+  const sub = await reg?.pushManager.getSubscription();
+  return sub && Notification.permission === 'granted' ? 'subscribed' : 'off';
+}
+
 function urlBase64ToUint8Array(base64) {
   const padding = '='.repeat((4 - (base64.length % 4)) % 4);
   const raw = atob((base64 + padding).replace(/-/g, '+').replace(/_/g, '/'));

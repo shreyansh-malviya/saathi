@@ -635,6 +635,7 @@
 .dose-time {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .dose-name {
@@ -647,7 +648,7 @@
 
 @media (max-width: 480px) {
   .dose-row {
-    grid-template-columns: 64px 1fr;
+    grid-template-columns: 78px 1fr;
   }
   .dose-row > :last-child {
     grid-column: 1 / -1;
