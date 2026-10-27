@@ -12,12 +12,10 @@ build/
 coverage/
 .vercel/
 
-# video renders and caches
-video/out/
-video/public/recordings/
+# demo video project and renders stay local (not part of the repo)
+video/
 *.mp4
 *.webm
-!video/public/**/*.mp3
 
 # logs
 *.log
@@ -32,7 +30,3 @@ Thumbs.db
 *.swp
 
 .vercel
-
-# video build inputs that are regenerated
-video/public/music.wav
-video/public/rec/

@@ -197,13 +197,7 @@ See [.env.example](.env.example). Real values are never committed.
 
 ## Demo video
 
-The demo video is code too: [video/](video/) is a [Remotion](https://www.remotion.dev/) project in an "editorial collage" style (torn paper, tape, postmarks) that mixes motion-graphic scenes with screen recordings of the live production app. Narration is generated with a neural Indian English voice from [video/src/script.js](video/src/script.js), and the background tanpura drone is synthesized by [video/scripts/music.py](video/scripts/music.py).
-
-```bash
-python -I video/scripts/record.py      # Playwright records the live app into video/public/rec/ (then convert to mp4)
-python -I video/scripts/tts.py         # narration -> video/public/vo/
-cd video && npm install && npx remotion render src/index.js SaathiDemo out/saathi-demo.mp4
-```
+A 4-minute walkthrough (link at the top of this README). It was made in code with [Remotion](https://www.remotion.dev/) in an "editorial collage" style: motion-graphic scenes mixed with Playwright screen recordings of the live production app, a neural Indian English narration and a synthesized tanpura background. The video project is kept outside this repository.
 
 ## Limitations and next steps
 
