@@ -3,7 +3,7 @@
 **A one-tap daily check-in for parents who live in another city. If it doesn't come, the right person in the family is alerted, in the right order.**
 
 Live app: **https://saathi-rouge.vercel.app** (click "See the live demo", no sign-up needed)
-Demo video: _link added on submission_
+Demo video: [watch the 4-minute walkthrough on Google Drive](https://drive.google.com/file/d/1xPMZ3IuB5BAaOzZYfeI1YSEBFV97sqCk/view?usp=drive_link)
 
 ![Saathi landing page](docs/screenshots/landing.jpg)
 
@@ -197,7 +197,7 @@ See [.env.example](.env.example). Real values are never committed.
 
 ## Demo video
 
-A 4-minute walkthrough (link at the top of this README). It was made in code with [Remotion](https://www.remotion.dev/) in an "editorial collage" style: motion-graphic scenes mixed with Playwright screen recordings of the live production app, a neural Indian English narration and a synthesized tanpura background. The video project is kept outside this repository.
+A 4-minute walkthrough: [watch it on Google Drive](https://drive.google.com/file/d/1xPMZ3IuB5BAaOzZYfeI1YSEBFV97sqCk/view?usp=drive_link). It was made in code with [Remotion](https://www.remotion.dev/) in an "editorial collage" style: motion-graphic scenes mixed with Playwright screen recordings of the live production app, a neural voice-over and a synthesized tanpura background. The video project is kept outside this repository.
 
 ## Limitations and next steps
 
