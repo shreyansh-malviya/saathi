@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Saathi - a daily check-in and care circle for parents who live in another city",
+  "type": "module",
   "workspaces": [
     "server",
     "client"

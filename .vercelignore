@@ -1,0 +1,5 @@
+rough
+video
+node_modules
+**/.env
+client/dist
