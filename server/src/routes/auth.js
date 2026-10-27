@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { User } from '../models/User.js';
 import { Circle } from '../models/Circle.js';
 import { validate, authLimiter } from '../middleware/http.js';
-import { requireUser, setSessionCookie, clearSessionCookie } from '../middleware/auth.js';
+import { requireUser, setSessionCookie, clearSessionCookie, SESSION_COOKIE } from '../middleware/auth.js';
 import { conflict, unauthorized } from '../lib/errors.js';
 
 const router = Router();
@@ -56,8 +56,12 @@ router.post('/logout', (_req, res) => {
   res.json({ ok: true });
 });
 
-router.get('/me', requireUser, async (req, res) => {
-  res.json({ user: req.user.toPublic(), circles: await myCircles(req.user._id) });
+// Signed-out visitors get 200 with user: null, so the landing page does not log a 401.
+router.get('/me', async (req, res, next) => {
+  if (!req.cookies?.[SESSION_COOKIE]) return res.json({ user: null, circles: [] });
+  return requireUser(req, res, async () => {
+    res.json({ user: req.user.toPublic(), circles: await myCircles(req.user._id) });
+  }).catch((err) => (err.status === 401 ? res.json({ user: null, circles: [] }) : next(err)));
 });
 
 export default router;
