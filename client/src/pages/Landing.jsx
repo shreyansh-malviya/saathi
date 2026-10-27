@@ -60,7 +60,7 @@ function DemoButton({ className = 'btn btn-primary', children = 'See the live de
   const { start, starting } = useStartDemo();
   return (
     <button className={className} onClick={start} disabled={starting} aria-busy={starting || undefined}>
-      {starting ? 'Setting up Maa’s circle...' : children}
+      {starting ? "Setting up Maa's circle..." : children}
     </button>
   );
 }
