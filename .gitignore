@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+
+# environment / secrets
+.env
+.env.*
+!.env.example
+
+# build output
+dist/
+build/
+coverage/
+.vercel/
+
+# video renders and caches
+video/out/
+video/public/recordings/
+*.mp4
+*.webm
+!video/public/**/*.mp3
+
+# logs
+*.log
+npm-debug.log*
+
+# editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
