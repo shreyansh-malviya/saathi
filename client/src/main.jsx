@@ -42,7 +42,7 @@ function PageLoader() {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <BrowserRouter>
         <ToastProvider>
           <AuthProvider>
             <Suspense fallback={<PageLoader />}>

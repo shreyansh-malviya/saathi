@@ -9,7 +9,8 @@ import { useStartDemo } from '../lib/demo.js';
 
 // Only allow redirects inside the app (prevents open-redirects via ?next=).
 function safeNext(next) {
-  return next && next.startsWith('/') && !next.startsWith('//') ? next : '/app';
+  // Browsers treat "/\evil.com" like "//evil.com", so backslashes are rejected too.
+  return next && next.startsWith('/') && !next.startsWith('//') && !next.includes('\\') ? next : '/app';
 }
 
 export default function Auth({ mode }) {
