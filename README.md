@@ -195,6 +195,16 @@ See [.env.example](.env.example). Real values are never committed.
 - **CI:** `.github/workflows/ci.yml` runs the unit tests and the client build on every push.
 - Production: **https://saathi-rouge.vercel.app**
 
+## Demo video
+
+The demo video is code too: [video/](video/) is a [Remotion](https://www.remotion.dev/) project in an "editorial collage" style (torn paper, tape, postmarks) that mixes motion-graphic scenes with screen recordings of the live production app. Narration is generated with a neural Indian English voice from [video/src/script.js](video/src/script.js), and the background tanpura drone is synthesized by [video/scripts/music.py](video/scripts/music.py).
+
+```bash
+python -I video/scripts/record.py      # Playwright records the live app into video/public/rec/ (then convert to mp4)
+python -I video/scripts/tts.py         # narration -> video/public/vo/
+cd video && npm install && npx remotion render src/index.js SaathiDemo out/saathi-demo.mp4
+```
+
 ## Limitations and next steps
 
 - Push notifications need the browser's permission; on iPhone they require adding Saathi to the home screen. The in-app inbox always works. An SMS or WhatsApp fallback for the L3 alert would be the next addition.
