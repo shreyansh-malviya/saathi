@@ -16,7 +16,7 @@ export function useStartDemo() {
     try {
       const { circleId } = await post('/demo');
       await qc.invalidateQueries({ queryKey: ['me'] });
-      navigate(`/app/c/${circleId}?welcome=demo`);
+      navigate(`/app/c/${circleId}/today?welcome=demo`);
     } catch (err) {
       toast.error(err);
     } finally {

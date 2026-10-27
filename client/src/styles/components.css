@@ -126,8 +126,9 @@
 }
 
 .stampstrip {
-  display: flex;
-  flex-wrap: wrap;
+  /* a calendar: one row per week */
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 52px));
   gap: 8px 6px;
 }
 
